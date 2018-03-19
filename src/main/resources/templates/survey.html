@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head> 
+    <title>NPS Survey</title> 
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body id="content">
+
+<div class="jumbotron">
+   <p th:text="'Hello, ' + ${email} + ', How are you doing.. '" />
+    <p>Please take a moment to let us know what you think by answering just two questions. Your feedback will help improve our service.</p>
+</div>
+
+
+<form id="surveyForm" class="form-horizontal" action="/surveyData" method="post">
+ <p>How likely are you to recommend [company] to a friend or colleague? </p>
+<label class="radio-inline"><input type="radio" name="optradio" value="1">1</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="2">2</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="3">3</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="4">4</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="5">5</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="6">6</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="7">7</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="8">8</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="9">9</label>
+<label class="radio-inline"><input type="radio" name="optradio" value="10">10</label>
+
+
+	 <p>What could we do better? How could we improve your experience?</p>
+	<div class="form-group">
+	  <label for="comment">Comment:</label>
+	  <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+	</div>
+	 <input id="rating" type="hidden" name="rating" >
+	 <input id="name1" type="hidden" name="name1" th:attr="value=${name}">
+	 <input id="email1" type="hidden" name="email1" th:attr="value=${email}" >
+	 <input id="timestamp1" type="hidden" name="timestamp1" th:attr="value=${timeStamp}" >
+	  <input id="isfirstTime1" type="hidden" name="isfirstTime1" th:attr="value=${isfirstTime}" >
+	<button type="submit" onclick="setRating();">Submit</button>
+	</form>
+	
+<script type="text/javascript"> 
+
+	function setRating() {
+	  var rated = $("input[name='optradio']:checked").val();
+	  document.getElementById("rating").setAttribute('value',rated);  
+	}
+	
+	window.onload = function() {
+
+		if(document.getElementById('isfirstTime1').value == 'true'){
+
+				$.ajax({
+				      type: "GET",
+				      url: "/greeting",
+				      contentType: "application/x-www-form-urlencoded",
+				      success: function(responseData, textStatus, jqXHR) {
+				          	 	document.getElementById("content").innerHTML = responseData;
+				      },
+				      error: function(jqXHR, textStatus, errorThrown) {
+				          console.log(errorThrown);
+				      }
+				  })	
+		}
+		
+	}
+
+</script>
+</body>
+</html>
