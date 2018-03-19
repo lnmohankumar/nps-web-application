@@ -130,7 +130,7 @@ public class NPSController {
 		e.printStackTrace();
 	}
     
-    return "dashboard";
+    return "customer";
     }
 
 }

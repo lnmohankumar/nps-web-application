@@ -67,7 +67,28 @@ public class AmazonSESSample {
         	    " to fill the survey "
         	);
         
-        msg.setContent(BODY,"text/html");
+        
+        String Body1 = "<!DOCTYPE HTML>\r\n" + 
+        		"<html xmlns:th=\"http://www.thymeleaf.org\">\r\n" + 
+        		"<head> \r\n" + 
+        		"\r\n" + 
+        		"<style>\r\n" + 
+        		"pre {\r\n" + 
+        		"    text-align: center;\r\n" + 
+        		"}\r\n" + 
+        		"</style>\r\n" + 
+        		"    <title>DBS Survey</title> \r\n" + 
+        		"    <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\r\n" + 
+        		"</head>\r\n" + 
+        		"<body>\r\n" + 
+        		"    <pre><h3>Thank you for visiting the Store.<h3>\r\n" + 
+        	    "<p>click "+
+        	    "<a href='" + url +"'>here</a>"+
+        	    " to fill the survey </pre>" +
+        		"</body>\r\n" + 
+        		"</html>";
+        
+        msg.setContent(Body1,"text/html");
         
         // Add a configuration set header. Comment or delete the 
         // next line if you are not using a configuration set
